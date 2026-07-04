@@ -1,0 +1,66 @@
+﻿name: Bug report
+description: Report a MAXRISK bug (crash, incorrect behavior, Dashboard broken, etc.)
+title: "[bug] "
+labels: ["bug", "testers"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting. Please fill out as much as you can.
+  - type: input
+    id: version
+    attributes:
+      label: MAXRISK version
+      placeholder: v0.1.0-testers
+    validations:
+      required: true
+  - type: input
+    id: os
+    attributes:
+      label: Windows version + build
+      placeholder: "Windows 11 26100.2033"
+    validations:
+      required: true
+  - type: input
+    id: game_version
+    attributes:
+      label: PoE2 patch
+      placeholder: "0.5.4"
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Launch MAXRISK
+        2. ...
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What you expected
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: What actually happened
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant logs
+      description: Paste from %APPDATA%/POE2GPS-MAXRISK/logs/*.log if present
+      render: text
+  - type: checkboxes
+    id: acks
+    attributes:
+      label: Acknowledgments
+      options:
+        - label: I'm running this on a throwaway account (not my main)
+          required: true
+        - label: I've read the risk warning
+          required: true

@@ -149,6 +149,16 @@ Grab the latest **`POE2GPS-MAXRISK-vX.Y.Z.zip`** from the [**Releases**](https:/
 
 The first release goes out with Wave 1 — auto-flask, panic cascade, buff maintenance, Dashboard, Discord pings. Subsequent waves land as tagged releases.
 
+## 🧪 Testers program
+
+**MAXRISK is in testers preview** for v0.1.0-testers. Volunteer testers get early
+access with clear expectations about what does and doesn't work yet.
+
+- **What ships in v0.1.0-testers**: Dashboard + Wave 1 module infrastructure. Flasks do NOT fire yet in this release — the live game-state driver lands in v0.2.0. See [`TESTING.md`](https://github.com/luther-rotmg/POE2GPS-MAXRISK-src/blob/master/TESTING.md) (private-repo — testers get access when they join the Discord).
+- **How to join**: come to the [Discord](https://discord.gg/32qdzWRja3) and ping in `#maxrisk-testers` (channel opens with v0.1.0-testers).
+- **What we need from testers**: bug reports (Issue template on this repo), first-run experience feedback, detection-surface observations.
+- **Timeline**: v0.2.0 (live game-state driver — flasks fire) targeted ~2 weeks after v0.1.0-testers feedback lands.
+
 ## 🎮 Community
 
 - 💬 **Discord**: [join us](https://discord.gg/32qdzWRja3) — this is where support happens, where issues get triaged, and where I post release notes. If you're using MAXRISK, be here.
