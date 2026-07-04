@@ -43,6 +43,45 @@ I haven't fully mapped what triggers a ban and what doesn't. GGG's detection sur
 
 None of this makes MAXRISK safe. It just makes the throwaway account the one that eats the risk instead of your main.
 
+### 🔐 Additional hardening — the limited-user Windows setup
+
+The strongest technical hardening you can layer on top of the throwaway-account discipline: run **PoE2 under a separate, limited (Standard) Windows user** that is **denied all access to the MAXRISK folder**. The game — and anything running inside it — then *literally cannot read MAXRISK's files or memory*, while MAXRISK (running as your normal admin account) can still read the game. Pure Windows account isolation; the tool touches nothing in the game to make this work.
+
+> **Why it matters:** a process can only read what its user account is allowed to. The game runs as a low-privilege account that's (a) blocked from the MAXRISK folder by an explicit Deny, and (b) too low-privilege to read your admin-level overlay's memory. Your overlay runs as *you* (admin), which can still read the game. A one-way mirror.
+
+**One-time setup** — open **Command Prompt as Administrator**, then:
+
+**1. Create a limited user for the game** (it's a Standard, non-admin user by default — choose any password, you'll use it to launch):
+```bat
+net user PoEPlayer * /add
+```
+The `*` makes it prompt for a password (typed hidden, twice). *GUI alternative: Settings → Accounts → Other users → Add account → "I don't have this person's sign-in info" → "Add a user without a Microsoft account".*
+
+**2. Deny that user every permission on the MAXRISK folder** (use your real unzip path):
+```bat
+icacls "C:\Games\POE2GPS-MAXRISK" /deny "PoEPlayer:(OI)(CI)F"
+```
+`(OI)(CI)` applies it to all files + subfolders, `F` is Full control, and `/deny` is an **explicit block that overrides any inherited "allow."** Verify it stuck: run `icacls "C:\Games\POE2GPS-MAXRISK"` and look for a `(DENY)` line for `PoEPlayer`.
+
+**3. Launch PoE2 as that limited user:**
+- **Standalone client** — make a shortcut whose **Target** is (the full `runas.exe` path is the reliable form inside a shortcut):
+  ```
+  C:\Windows\System32\runas.exe /user:PoEPlayer /savecred "C:\Path\To\PathOfExile.exe"
+  ```
+  `/savecred` caches the password after the **first** launch so it won't ask again. Prefer to type it every time? Just drop `/savecred`.
+- **Steam** — Steam runs only **one instance per PC**, so you must **fully exit your own Steam first** (right-click the tray icon → **Exit**), then start it as the limited user with a shortcut. Set the shortcut **Target** to the line matching your Steam drive:
+  ```
+  C:\Windows\System32\runas.exe /user:PoEPlayer /savecred "C:\Program Files (x86)\Steam\steam.exe"
+  ```
+  ```
+  C:\Windows\System32\runas.exe /user:PoEPlayer /savecred "D:\Steam\steam.exe"
+  ```
+  The **first** run does two one-time things: Windows asks for `PoEPlayer`'s password (`/savecred` remembers it afterward), and **Steam makes you log in again** — it's a brand-new Steam profile under the limited user (your Steam password + Steam Guard; tick "remember me" so it sticks). After that it's **one click**: the shortcut opens Steam as `PoEPlayer`, and you launch PoE2 from there. *(Heads-up: only the MAXRISK folder gets the Deny — `PoEPlayer` still needs to read the Steam/game files, which it can by default. If Steam sits in `Program Files` and won't update as a standard user, install it to a plain folder like `D:\Steam`, or grant `PoEPlayer` **Modify** on the Steam folder. The standalone client avoids all of this.)*
+
+**4. Run MAXRISK as your normal account** — `Overlay.exe` **as Administrator**, exactly as [Download](#-download) says. Admin reads the game fine; the game can't read back.
+
+Pair the limited-user setup with the throwaway-account discipline above and you're doing every hardening layer available to a user. It **does not** make MAXRISK safe — nothing does — but it closes off one of the most common detection paths (the game process reading the tool's on-disk files or in-memory state). *(Adapted from the community [Run PoE as Limited User](https://www.ownedcore.com/forums/mmo/path-of-exile/poe-bots-programs/676345-run-poe-limited-user.html) guide, syntax-verified against Windows 11.)*
+
 **If in doubt — use [POE2GPS](https://github.com/luther-rotmg/POE2GPS) instead.** It's the same author, same brand, same care, and it will never risk your account.
 
 ---
