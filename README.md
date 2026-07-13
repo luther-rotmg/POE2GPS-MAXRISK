@@ -1,21 +1,22 @@
 <div align="center">
 
 # ⚡ POE2GPS-MAXRISK
-
 ### The wild sibling of POE2GPS. Everything the safe overlay refused to ship.
 
 *Auto-flask. Reactive dodge. Buff maintenance. Skill rotation. Panic escape. League-mechanic auto-triggers. A comprehensive suite that **acts** on your character.*
 
 [![Latest release](https://img.shields.io/github/v/release/luther-rotmg/POE2GPS-MAXRISK?sort=semver&label=release)](https://github.com/luther-rotmg/POE2GPS-MAXRISK/releases)
-![Supports PoE2 patch 0.5.4](https://img.shields.io/badge/supports%20PoE2-0.5.4-2ea043)
+![Supports PoE2 through patch 0.5.4](https://img.shields.io/badge/supports%20PoE2-through%20patch%200.5.4-2ea043)
+![.NET 10](https://img.shields.io/badge/.NET-10-512BD4?logo=dotnet)
 ![Windows x64](https://img.shields.io/badge/Windows-x64-0078D6)
 ![License: proprietary](https://img.shields.io/badge/license-proprietary-red)
 [![Discord](https://img.shields.io/badge/Discord-join%20us-5865F2?logo=discord&logoColor=white)](https://discord.gg/32qdzWRja3)
 [![Support on Ko-fi](https://img.shields.io/badge/Ko--fi-support%20the%20dev-FF5E5B?logo=kofi&logoColor=white)](https://ko-fi.com/lutherrotmg)
 <br>
-![Input: writes](https://img.shields.io/badge/input-writes%20to%20game-red)
+![Input: writes to game](https://img.shields.io/badge/input-writes%20to%20game-red)
 ![Risk: high](https://img.shields.io/badge/detection%20risk-HIGH-red)
-![Not for main accounts](https://img.shields.io/badge/main%20account-DO%20NOT%20USE-red)
+![Main account: DO NOT USE](https://img.shields.io/badge/main%20account-DO%20NOT%20USE-red)
+![Obfuscation: ConfuserEx v2](https://img.shields.io/badge/obfuscation-ConfuserEx%20v2-orange)
 
 </div>
 
@@ -86,42 +87,43 @@ Pair the limited-user setup with the throwaway-account discipline above and you'
 
 ---
 
-## ⚡ What MAXRISK does — the full feature list
+## ⚡ What MAXRISK does — 18 shipped modules
 
-MAXRISK is POE2GPS with the safety governor removed and 15+ new modules bolted on. Everything POE2GPS reads and draws, MAXRISK also does — plus it *acts* on the game.
+MAXRISK ships 18 shipped modules across four families. Everything POE2GPS reads and draws, MAXRISK also does — plus it *acts* on the game.
 
-Some of these features are already shipped in the current release; others land as the product matures across four waves. Each wave is a public release.
+### 🎯 Combat auto-play
 
-### 🌊 Wave 1 (v0.1.0) — Shipping now: the "auto-safety" core
+Skill automation and safety net modules that fire in combat or emergency situations.
+- **Auto-Flask** — fires flasks with cooldown discipline; F8 kill-switch
+- **Panic Cascade** — HP-crash portal-out + kill-switch
+- **Buff Maintenance** — keeps configured buffs applied; foreground-gated
+- **Reactive Dodge** — dodge roll on incoming projectile; opt-in
+- **Freeze/Shock Awareness** — flask trigger on freeze/shock elemental threat
+- **Hotkey Remap** — module toggle + panic hotkey glue
 
-- 🧪 **Auto-flask suite** — life / mana / ES / utility flasks fire on player-side thresholds with per-flask cooldowns and charge tracking. Configure each flask independently — hotkey, threshold, cooldown, on/off. The single most-requested feature.
-- 🚨 **Panic cascade** — HP crash detection. When your life drops below a configured threshold, MAXRISK fires your portal hotkey and (optionally) kills the game's TCP connections to force an emergency disconnect. Between reactive dodging and dying, panic-out gives you seconds you didn't have.
-- 🌿 **Buff maintenance** — configure your Herald / aura / persistent skill. If the buff drops (death, dispel, area transition), MAXRISK re-fires the hotkey so you never chase down a lapsed buff mid-combat.
-- 🖥️ **Web dashboard** — `http://localhost:7778` or **F12**. Every module toggle, live-fire log, real-time state, Discord ping config. Loopback-only, so nothing outside your machine sees it.
-- 🔔 **Discord ping toggles** — configure webhook notifications by category. Milestone (level-ups, act boundaries, boss kills). Safety (panic fires, HP crash events). High-stakes (about to click a Ritual altar). Fine-grained per-category on/off from the dashboard.
+### 💰 Loot & economy
 
-### 🌊 Wave 2 (v0.2.0) — Combat-aware core
+Modules that assist with loot identification and economic decisions.
+- **Loot Highlight** — highlights rare/notable drops on the overlay
+- **Ninja Pricer** — poe.ninja live-price overlay for items under cursor
+- **DPS Calc** — real-time DPS estimator for the equipped skill
+- **Post-Combat Drop Overlay** — combat-quiet summary of the last fight's chaos/divine/rare drops; Dashboard-SSE state only in v0.4.0-alpha, pixel drawing v0.4.1
 
-- ⚔️ **Rule-driven skill rotation** — a priority-ordered DSL for combat. "Fire skill X on bosses within Y range if buff Z is up." Compose your own combat behaviour from small, testable rules. This is the "jolly stupid" heart of MAXRISK.
-- 🌀 **Reactive dodge on danger mods** — the rare-mob affix catalog (`volatile.*`, `ondeath`, `proximal`, and friends) wired to your dodge-roll key. When something dangerous telegraphs, MAXRISK dodges before you register the animation.
-- 🛑 **AFK-detect + auto-pause** — the account-safety line. If you provide zero input for a configurable window, MAXRISK pauses everything until you tap a key. It's what keeps this from being an AFK-farm bot.
-- 💰 **Auto-loot pickup** — click item labels within a radius. Basic rarity + base-type filter. A quick swap-tab-and-grab replacement.
-- 📈 **XP tracker + milestone pings** — level-ups, act boundaries, XP/hour, per-league projected timing. Wires straight into the Discord ping system.
+### 🏗️ Build & QoL
 
-### 🌊 Wave 3 (v0.3.0) — QoL sprawl
+Modules that help with character development and quality of life.
+- **Build Helper** — resistance analyzer + top-3 build recommendations
+- **Stash Sort** — auto-organizes stash items; foreground-gated
+- **Enemy Status** — freeze/shock/ignite indicator over enemies
 
-- 💎 **Ninja pricer overlay** — hover an item, see the current poe.ninja price. Fast triage of drops during combat pulses.
-- 📊 **Real-time DPS calculator** — live damage estimation for your current skill + gear. Streamer-friendly on-screen readout.
-- ⚡ **Freeze / shock / danger HUD** — visual warnings for incoming crowd-control and telegraphed high-damage abilities.
-- ⌨️ **Skill hotkey remapper** — bind skills to keys the game's UI won't let you. Full input-layer key rewriting.
-- 📦 **Auto-stash sort** — click stash tabs and drop items to configured target tabs based on rarity + base filters. Basic; not a preset system.
+### ⏱️ Meta & session
 
-### 🌊 Wave 4 (v0.4.0) — Memory inspection + endgame session
-
-- 🔬 **Memory inspection suite** — the buff table straight from game memory (with raw internal buff names, not tooltips), entity modifiers, item roll data without OCR, passive tree state. The "X-ray vision" of the tool.
-- 🗺️ **Map layout preview** — layout reveal on zone entry + post-zone auto-portal-out + auto-log-out chains, all constrained to inside a single zone.
-- 🎰 **League mechanic auto-triggers** — auto-click Ritual altar, auto-accept Ultimatum, auto-collect Delirium mirror, auto-activate Breach hand. Per-mechanic toggle so you opt in to each one individually.
-- 💰 **Post-combat drop overlay** — highlight valuable drops for your manual loot decision. Pairs with the ninja pricer.
+Modules that track session metrics and provide meta information.
+- **Dashboard (M0)** — localhost:7778 SPA; loopback-only; SSE-driven live state
+- **AFK Gate** — input suppression when player is idle
+- **XP Tracker** — session XP + XP/hr
+- **Session Pipeline** — captures per-map performance metrics
+- **League Awareness** — ritual/breach/delve state tracking + heartbeat
 
 ---
 
@@ -143,27 +145,29 @@ Even the wild sibling has hard lines:
 
 ## 🚀 Download
 
-Grab the latest **`POE2GPS-MAXRISK-vX.Y.Z.zip`** from the [**Releases**](https://github.com/luther-rotmg/POE2GPS-MAXRISK/releases) page. Unzip. Run.
+**v0.4.0** is available on the [Releases tab](https://github.com/luther-rotmg/POE2GPS-MAXRISK/releases). Download the latest zip, verify the SHA256 sidecar, unzip, run `Overlay.exe` from a limited-user Windows account (see risk section above). See the [private repo README](https://github.com/luther-rotmg/POE2GPS-MAXRISK-src/blob/master/README.md#-release-workflow-v040) for what's inside the zip and how the release is built.
 
-> **Read the risk warning at the top first.** Not on a throwaway account? Close this tab.
+If v0.4.0 hasn't landed at the Releases tab yet, MAXRISK is between an alpha tag and the public release — check the [Discord](https://discord.gg/32qdzWRja3) `#maxrisk-releases` channel for progress.
 
-The first release goes out with Wave 1 — auto-flask, panic cascade, buff maintenance, Dashboard, Discord pings. Subsequent waves land as tagged releases.
+---
 
 ## 🧪 Testers program
 
-**MAXRISK is in testers preview** for v0.1.0-testers. Volunteer testers get early
-access with clear expectations about what does and doesn't work yet.
+MAXRISK is in **v0.4.0-alpha** private testing. Volunteer testers get early access to the obfuscated binary through Discord.
 
-- **What ships in v0.1.0-testers**: Dashboard + Wave 1 module infrastructure. Flasks do NOT fire yet in this release — the live game-state driver lands in v0.2.0. See [`TESTING.md`](https://github.com/luther-rotmg/POE2GPS-MAXRISK-src/blob/master/TESTING.md) (private-repo — testers get access when they join the Discord).
-- **How to join**: come to the [Discord](https://discord.gg/32qdzWRja3) and ping in `#maxrisk-testers` (channel opens with v0.1.0-testers).
-- **What we need from testers**: bug reports (Issue template on this repo), first-run experience feedback, detection-surface observations.
-- **Timeline**: v0.2.0 (live game-state driver — flasks fire) targeted ~2 weeks after v0.1.0-testers feedback lands.
+- **What ships in v0.4.0-alpha:** All 18 modules from the inventory above, Dashboard SPA on localhost:7778, mock-endpoint injection for headless testing (`MAXRISK_MOCK_*` env vars), the full compliance-gate v2 moat closure. Overlay pixel drawing for M19 (Post-Combat Drop Overlay) is deferred to v0.4.1 — v0.4.0-alpha delivers the SSE-only view.
+- **How to join:** come to the [Discord](https://discord.gg/32qdzWRja3) and ping in `#maxrisk-testers`. Testers get access to the private repo's `TESTING.md` for the 4 tester-verifier vectors per module.
+- **What's next:** the v0.4.0 public release ceremony is Sub-project C of the "get out 0.4.0" arc; overlay pixel drawing lands in v0.4.1.
+
+---
 
 ## 🎮 Community
 
 - 💬 **Discord**: [join us](https://discord.gg/32qdzWRja3) — this is where support happens, where issues get triaged, and where I post release notes. If you're using MAXRISK, be here.
 - 🐛 **Issues**: use the [Issues](https://github.com/luther-rotmg/POE2GPS-MAXRISK/issues) tab. Include the version, the module that misbehaved, and — if you're comfortable — steps to reproduce.
 - ⭐ **Enjoying MAXRISK? Star the repo.** Free tools live and die on visibility.
+
+---
 
 ## ❓ FAQ
 
@@ -187,6 +191,14 @@ I'm sorry. You were warned. Please don't use MAXRISK on your main.
 
 **Q: Is there a way to make it safer?**
 See "the least-bad path" in the risk section above. Beyond that: use POE2GPS instead.
+
+**Q: Is v0.4.0 obfuscated?**
+Yes. Every shipped binary from v0.4.0 forward is processed through ConfuserEx v2 (mkaring fork) with the full protection stack: rename, control-flow flattening, string encryption, anti-tamper, anti-debug, invalid-metadata. See the [private repo](https://github.com/luther-rotmg/POE2GPS-MAXRISK-src) for the release harness.
+
+**Q: Where are the screenshots?**
+Coming in v0.4.1. Sub-project B (this README refresh) shipped without them because the obfuscated build hadn't hit testers yet; real screenshots ship after the release ceremony.
+
+---
 
 ## 📜 License
 
